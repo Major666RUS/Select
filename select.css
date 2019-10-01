@@ -1,0 +1,129 @@
+.select {
+  box-sizing: content-box;
+  display: block;
+  position: relative;
+  width: 100%;
+  min-height: 40px;
+  text-align: left;
+  color: #35495e;
+}
+.select__base {
+  display: none;
+}
+.select_tags {
+  min-height: 40px;
+  display: block;
+  padding: 8px 40px 0 8px;
+  border-radius: 5px;
+  border: 1px solid #e8e8e8;
+  background: #fff;
+  font-size: 14px;
+}
+.select, 
+.select_single {
+  font-family: inherit;
+    font-size: 16px;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+}
+.select_single,
+.select_input {
+  position: relative;
+  display: inline-block;
+  min-height: 20px;
+  line-height: 20px;
+  border: none;
+  border-radius: 5px;
+  background: #fff;
+  padding: 0 0 0 5px;
+  width: 100%;
+  transition: border .1s ease;
+  box-sizing: border-box;
+  margin-bottom: 8px;
+  vertical-align: top;
+}
+.select_single {
+  padding-left: 5px;
+  margin-bottom: 8px;
+}
+.select_placeholder {
+  color: #adadad;
+  display: inline-block;
+  margin-bottom: 10px;
+  padding-top: 4px;
+  padding-left: 5px;
+}
+.select_cursor {
+  position: absolute;
+  width: 40px;
+  height: 38px;
+  right: 1px;
+  top: 1px;
+  padding: 4px 8px;
+  text-align: center;
+  transition: transform .2s ease;
+}
+.select_cursor:before {
+  position: relative;
+  right: 0;
+  top: 65%;
+  color: #999;
+  margin-top: 4px;
+  border-style: solid;
+  border-width: 5px 5px 0;
+  border-color: #999 transparent transparent;
+  content: "";
+}
+.select_list {
+  list-style: none;
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+  min-width: 100%;
+  vertical-align: top;
+}
+.select_listWrapper {
+  position: absolute;
+  display: none;
+  background: #fff;
+  width: 100%;
+  max-height: 240px;
+  overflow: auto;
+  border: 1px solid #e8e8e8;
+  border-top: none;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+  z-index: 3;
+  -webkit-overflow-scrolling: touch;
+}
+.select_option {
+  display: flex;
+  align-items: center;
+  padding: 12px;
+  min-height: 40px;
+  line-height: 16px;
+  text-decoration: none;
+  text-transform: none;
+  position: relative;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.select_option:hover {
+  background: #3c6ddc;
+  outline: none;
+  color: #fff;
+}
+.select_option__selected {
+  background: #ff6a6a;
+  color: #fff;
+  font-weight: 700;
+}
+.select__active > .select_listWrapper {
+  display: block;
+}
+.select__active > .select_cursor {
+  transform: rotate(180deg);
+}
+.select * {
+  box-sizing: border-box;
+}

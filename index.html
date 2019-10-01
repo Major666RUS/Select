@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>Кастомный select</title>
+    <script type="text/javascript" src="select.js"></script>
+    <link rel="stylesheet" type="text/css" href="select.css">
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        let elems = document.querySelectorAll('.select')
+        let a = new Select(elems, {})
+        console.log(a.element)
+      });
+    </script>
+  </head>
+  <body>
+    <select name="select_1" id="select_1" class="select">
+      <option value="1">Первый пункт</option>
+      <option value="2">Второй пункт</option>
+      <option value="3">Третий пункт</option>
+    </select>
+    <hr>
+    <select name="select_2" id="select_2" class="select">
+        <option value="1">Первый пункт</option>
+        <option value="2">Второй пункт</option>
+        <option value="3">Третий пункт</option>
+      </select>
+  </body>
+</html>
+
