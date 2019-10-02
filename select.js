@@ -85,33 +85,6 @@
         option(elem, select)
 
         elem.parentNode.insertBefore(select, element[i].nextSibling)
-
-        select.addEventListener('click', function(e) {
-          e.target.closest('.select').classList.toggle('select__active')
-          let option = e.target.closest('.select_option')
-          if (option) {
-            if (e.target.closest('.select_option__selected')) {
-              e.target.classList.remove('select_option__selected')
-              select.querySelector('.select_placeholder').style.display = ''
-              select.querySelector('.select_tags').removeChild(select.querySelector('.select_single'))
-              elem.querySelector('option').setAttribute('value', '')
-            } else {
-              let options = option.parentNode.querySelectorAll('.select_option')
-              for (let i = 0; i < options.length; i++) {
-                options[i].classList.remove('select_option__selected')
-              }
-              option.classList.add('select_option__selected')
-  
-              let single = select.querySelector('.select_single') || document.createElement('DIV')
-              single.className = 'select_single'
-              single.textContent = option.textContent
-              select.querySelector('.select_placeholder').style.display = 'none'
-              select.querySelector('.select_tags').appendChild(single)
-
-              elem.querySelector('option').setAttribute('value', option.dataset.value)
-            }
-          }
-        })
       }
     } else if (element.toString() === '[object HTMLSelectElement]') {
       let select = customSelect()
@@ -120,6 +93,42 @@
 
       element.parentNode.insertBefore(customSelect(), element.nextSibling)
     }
+
+    document.addEventListener('click', function(e) {
+      if (!e.target.closest('.select') ) {
+        let activeElem = document.querySelector('.select__active')
+        if (activeElem) activeElem.classList.remove('select__active')
+        return false
+      }
+
+      //if (e.target.closest('.select_tags')) e.target.closest('.select').classList.toggle('select__active')
+
+      if (document.querySelector('.select__active')) document.querySelector('.select__active').classList.remove('select__active')
+      e.target.closest('.select').classList.toggle('select__active')
+      let option = e.target.closest('.select_option')
+      if (option) {
+        if (e.target.closest('.select_option__selected')) {
+          e.target.classList.remove('select_option__selected')
+          select.querySelector('.select_placeholder').style.display = ''
+          select.querySelector('.select_tags').removeChild(select.querySelector('.select_single'))
+          elem.querySelector('option').setAttribute('value', '')
+        } else {
+          let options = option.parentNode.querySelectorAll('.select_option')
+          for (let i = 0; i < options.length; i++) {
+            options[i].classList.remove('select_option__selected')
+          }
+          option.classList.add('select_option__selected')
+
+          let single = select.querySelector('.select_single') || document.createElement('DIV')
+          single.className = 'select_single'
+          single.textContent = option.textContent
+          select.querySelector('.select_placeholder').style.display = 'none'
+          select.querySelector('.select_tags').appendChild(single)
+
+          elem.querySelector('option').setAttribute('value', option.dataset.value)
+        }
+      }
+    })
 
   };
 
