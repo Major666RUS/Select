@@ -81,12 +81,12 @@
       
       let elem = closestSelect.previousSibling,
           option = e.target.closest('.select_option')
-          
+
       if (option) {
         if (e.target.closest('.select_option__selected')) {
           e.target.classList.remove('select_option__selected')
           closestSelect.querySelector('.select_placeholder').style.display = ''
-          closestSelect.querySelector('.select_tags').removeChild(select.querySelector('.select_single'))
+          closestSelect.querySelector('.select_tags').removeChild(closestSelect.querySelector('.select_single'))
           elem.querySelector('option').setAttribute('value', '')
         } else {
           let options = option.parentNode.querySelectorAll('.select_option')
