@@ -49,33 +49,6 @@
       elem.appendChild(newOption)
     }
 
-    let clickCallback = function(e) {
-      e.target.closest('.select').classList.toggle('select__active')
-      let option = e.target.closest('.select_option')
-      if (option) {
-        if (e.target.closest('.select_option__selected')) {
-          e.target.classList.remove('select_option__selected')
-          select.querySelector('.select_placeholder').style.display = ''
-          select.querySelector('.select_tags').removeChild(select.querySelector('.select_single'))
-          elem.querySelector('option').setAttribute('value', '')
-        } else {
-          let options = option.parentNode.querySelectorAll('.select_option')
-          for (let i = 0; i < options.length; i++) {
-            options[i].classList.remove('select_option__selected')
-          }
-          option.classList.add('select_option__selected')
-
-          let single = select.querySelector('.select_single') || document.createElement('DIV')
-          single.className = 'select_single'
-          single.textContent = option.textContent
-          select.querySelector('.select_placeholder').style.display = 'none'
-          select.querySelector('.select_tags').appendChild(single)
-
-          elem.querySelector('option').setAttribute('value', option.dataset.value)
-        }
-      }
-    }
-
     if (element.toString() === '[object NodeList]') {
       for (let i = 0; i < element.length; i++) {
         let select = customSelect()
@@ -95,22 +68,25 @@
     }
 
     document.addEventListener('click', function(e) {
-      if (!e.target.closest('.select') ) {
-        let activeElem = document.querySelector('.select__active')
+      let activeElem = document.querySelector('.select__active'),
+          closestSelect = e.target.closest('.select')
+
+      if (!closestSelect ) {
         if (activeElem) activeElem.classList.remove('select__active')
         return false
       }
 
-      //if (e.target.closest('.select_tags')) e.target.closest('.select').classList.toggle('select__active')
-
-      if (document.querySelector('.select__active')) document.querySelector('.select__active').classList.remove('select__active')
-      e.target.closest('.select').classList.toggle('select__active')
-      let option = e.target.closest('.select_option')
+      if (activeElem && closestSelect !== activeElem) activeElem.classList.remove('select__active')
+      closestSelect.classList.toggle('select__active')
+      
+      let elem = closestSelect.previousSibling,
+          option = e.target.closest('.select_option')
+          
       if (option) {
         if (e.target.closest('.select_option__selected')) {
           e.target.classList.remove('select_option__selected')
-          select.querySelector('.select_placeholder').style.display = ''
-          select.querySelector('.select_tags').removeChild(select.querySelector('.select_single'))
+          closestSelect.querySelector('.select_placeholder').style.display = ''
+          closestSelect.querySelector('.select_tags').removeChild(select.querySelector('.select_single'))
           elem.querySelector('option').setAttribute('value', '')
         } else {
           let options = option.parentNode.querySelectorAll('.select_option')
@@ -119,11 +95,11 @@
           }
           option.classList.add('select_option__selected')
 
-          let single = select.querySelector('.select_single') || document.createElement('DIV')
+          let single = closestSelect.querySelector('.select_single') || document.createElement('DIV')
           single.className = 'select_single'
           single.textContent = option.textContent
-          select.querySelector('.select_placeholder').style.display = 'none'
-          select.querySelector('.select_tags').appendChild(single)
+          closestSelect.querySelector('.select_placeholder').style.display = 'none'
+          closestSelect.querySelector('.select_tags').appendChild(single)
 
           elem.querySelector('option').setAttribute('value', option.dataset.value)
         }
